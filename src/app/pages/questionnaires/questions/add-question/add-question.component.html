@@ -1,0 +1,89 @@
+<p-breadcrumb [model]="sharedService.items" [home]="sharedService.home"></p-breadcrumb>
+<br>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <p-toast></p-toast>
+            <h5 class="m-0">Adicionar pergunta</h5>
+            <br>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12">
+                    <label>Descrição</label>
+                    <textarea pInputTextarea rows="5" cols="30"></textarea>
+                </div>
+            </div>
+            <p-table #dt 
+                     [value]="filteredAnswers" 
+                     [columns]="cols" 
+                     responsiveLayout="scroll" 
+                     [rows]="10" 
+                     [globalFilterFields]="['name','country.name','representative.name','status']" 
+                     [rows]="10" 
+                     [paginator]="true" 
+                     [rowsPerPageOptions]="[10,20,30]" 
+                     [showCurrentPageReport]="true" 
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+                     selectionMode="multiple" 
+                     [rowHover]="true" 
+                     dataKey="id">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="answerDescription">
+                            Resposta 
+                            <p-sortIcon field="answerDescription"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="answerIsCorrectF">
+                            É a correta? 
+                            <p-sortIcon field="answerIsCorrectF"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-answer>
+                    <tr>
+                        <!-- <td>
+                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                        </td> -->
+                        <td style="width:50%; min-width:10rem;" (click)="openAnswerPage(answer)">
+                            <span class="p-column-title">Resposta</span>
+                            {{answer.answerDescription}}
+                        </td>
+                        <td style="width:50%; min-width:10rem;" (click)="openAnswerPage(answer)">
+                            <span class="p-column-title">É a correta?</span>
+                            {{answer.answerIsCorrectF}}
+                        </td>
+                        <!-- <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+                            <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" />
+                        </td> -->
+                        <!-- <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                            </div>
+                        </td> -->
+                    </tr>
+                </ng-template>
+            </p-table>
+            <br>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Adicionar resposta" 
+                                icon="pi pi-user-plus" 
+                                class="p-button-primary mr-2" 
+                                (click)="showAddAnswerDialog()"></button>
+                    </div>
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Finalizar" 
+                                icon="pi pi-user-plus" 
+                                class="p-button-primary mr-2" 
+                                (click)="openAddQuestionPage()"></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+        </div>
+    </div>
+</div>
