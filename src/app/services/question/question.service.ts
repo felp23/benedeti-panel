@@ -52,11 +52,11 @@ export class QuestionService {
             catchError(this.handleError('questions', [])));
     };
 
-    deleteQuestion(editedQuestion): Observable<any> {
+    deleteQuestion(questionId): Observable<any> {
         let URL = this.configService.baseURL + 'question/delete-question';
         return this.http.post<any>(URL, 
         {
-            questionId: editedQuestion.questionId,
+            questionId: questionId,
         })
         .pipe(
             tap(data => this.log(data)),

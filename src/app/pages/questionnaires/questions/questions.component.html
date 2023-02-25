@@ -51,11 +51,11 @@
                         <!-- <td>
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td> -->
-                        <td style="width:75%; min-width:10rem;" (click)="openQuizPage(quiz)">
+                        <td style="width:75%; min-width:10rem;" (click)="openQuestionPage(question)">
                             <span class="p-column-title">Descrição da pergunta</span>
                             {{question.questionDescription}}
                         </td>
-                        <td style="width:25%; min-width:10rem;" (click)="openQuizPage(quiz)">
+                        <td style="width:25%; min-width:10rem;" (click)="openQuestionPage(question)">
                             <span class="p-column-title">Nível de dificuldade </span>
                             {{question.questionDifficultyF}}
                         </td>

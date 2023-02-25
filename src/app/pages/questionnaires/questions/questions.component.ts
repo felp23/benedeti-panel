@@ -33,6 +33,12 @@ export class QuestionsComponent implements OnInit {
         this.router.navigateByUrl('/pages/add-question');
     }
 
+    openQuestionPage(event) {
+        this.questionService.selectedQuestion = event;
+        console.log("Selected Question: ", event);
+        this.router.navigateByUrl('/pages/question');
+    }
+
 	async getQuestionsByQuizId() {
 		// this.loadingService.presentLoading();
 		await this.questionService.getQuestionsByQuizId(this.quizService.selectedQuiz.quizId)

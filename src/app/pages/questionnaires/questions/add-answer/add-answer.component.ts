@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AnswerService, SharedService } from 'src/app/services';
+import { AnswerService, QuestionService, SharedService } from 'src/app/services';
 
 @Component({
     selector: 'app-add-answer',
@@ -19,6 +19,7 @@ export class AddAnswerComponent implements OnInit {
 
     constructor(
         public answerService: AnswerService,
+        public questionService: QuestionService,
         public sharedService: SharedService,
         public ref: DynamicDialogRef,
     ) { }
@@ -27,7 +28,12 @@ export class AddAnswerComponent implements OnInit {
     }
 
     addAnswer() {
-        this.answerService.newAnswer.answerQuestionId = 0;
+        if (this.questionService.selectedQuestion.questionId) {
+            this.answerService.newAnswer.answerQuestionId = this.questionService.selectedQuestion.questionId;
+        }
+        if (!this.questionService.selectedQuestion.questionId) {
+            this.answerService.newAnswer.answerQuestionId = 0;
+        }
         console.log('Nova resposta:', this.answerService.newAnswer);
         this.answerService.addAnswer().subscribe(data => 
             this.checkReturn(data)
@@ -38,6 +44,7 @@ export class AddAnswerComponent implements OnInit {
         console.log('Resposta', response);   
         if (response.success == true) {
             this.answerService.newAnswer = {};
+            this.questionService.selectedQuestion = {};
             this.ref.close(this.sharedService.toastAddSuccess());
         }
     }
