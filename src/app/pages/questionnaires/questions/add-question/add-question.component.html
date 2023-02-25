@@ -50,11 +50,11 @@
                         <!-- <td>
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td> -->
-                        <td style="width:50%; min-width:10rem;" (click)="openAnswerPage(answer)">
+                        <td style="width:50%; min-width:10rem;" (click)="showAnswerDialog(answer)">
                             <span class="p-column-title">Resposta</span>
                             {{answer.answerDescription}}
                         </td>
-                        <td style="width:50%; min-width:10rem;" (click)="openAnswerPage(answer)">
+                        <td style="width:50%; min-width:10rem;" (click)="showAnswerDialog(answer)">
                             <span class="p-column-title">É a correta?</span>
                             {{answer.answerIsCorrectF}}
                         </td>

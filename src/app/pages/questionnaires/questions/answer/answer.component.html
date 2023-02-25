@@ -1,1 +1,30 @@
-<p>answer works!</p>
+<div class="p-fluid p-formgrid grid">
+    <div class="field col-12 md:col-12">
+        <label>Descrição</label>
+        <textarea pInputTextarea 
+                  rows="5" 
+                  cols="30"
+                  [(ngModel)]="editedAnswer.answerDescription"></textarea>
+    </div>
+    <div class="field col-12 md:col-12">
+        <label>É a resposta correta?</label>
+        <p-dropdown [options]="options" [(ngModel)]="editedAnswer.answerIsCorrect"></p-dropdown>
+    </div>
+    <div class="field col-12 md:col-12">
+        <div class="my-2">
+            <button pButton 
+                    pRipple 
+                    label="Finalizar" 
+                    icon="pi pi-user-plus" 
+                    class="p-button-primary mr-2" ></button>
+        </div>
+        <div class="my-2">
+            <button pButton 
+                    pRipple 
+                    label="Apagar" 
+                    icon="pi pi-user-plus" 
+                    class="p-button-danger mr-2"
+                    (click)="deleteAnswer()" ></button>
+        </div>
+    </div>
+</div>

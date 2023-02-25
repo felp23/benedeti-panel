@@ -97,16 +97,15 @@ export class AddQuestionComponent implements OnInit {
     showAddAnswerDialog() {
         const ref = this.dialogService.open(AddAnswerComponent, {
             header: 'Adicionar resposta',
-            width: '32%'
         });
 
         ref.onClose.subscribe(data => this.getAnswersByIdZero());
     }
 
-    showAnswerDialog() {
+    showAnswerDialog(event) {
+        this.answerService.selectedAnswer = event;
         const ref = this.dialogService.open(AnswerComponent, {
             header: 'Detalhes da resposta',
-            width: '32%'
         });
 
         ref.onClose.subscribe(data => this.getAnswersByIdZero());
