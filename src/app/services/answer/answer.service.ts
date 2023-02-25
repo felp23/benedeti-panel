@@ -49,6 +49,17 @@ export class AnswerService {
             catchError(this.handleError('Answers', [])));
     }
 
+    editAnswerQuestionId(questionId): Observable<any> {
+        let URL = this.configService.baseURL + 'answer/edit-answer-question-id';
+        return this.http.post<any>(URL, 
+        {
+            answerQuestionId: questionId,
+        })
+        .pipe(
+            tap(data => this.log(data)),
+            catchError(this.handleError('Answers', [])));
+    }
+
     deleteAnswer(answerId): Observable<any> {
         let URL = this.configService.baseURL + 'answer/delete-answer';
         return this.http.post<any>(URL, 

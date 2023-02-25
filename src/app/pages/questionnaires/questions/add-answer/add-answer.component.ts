@@ -3,10 +3,11 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AnswerService, SharedService } from 'src/app/services';
 
 @Component({
-  selector: 'app-add-answer',
-  templateUrl: './add-answer.component.html',
-  styleUrls: ['./add-answer.component.scss']
+    selector: 'app-add-answer',
+    templateUrl: './add-answer.component.html',
+    styleUrls: ['./add-answer.component.scss']
 })
+
 export class AddAnswerComponent implements OnInit {
 
     options = [

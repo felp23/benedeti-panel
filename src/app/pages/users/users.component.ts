@@ -61,11 +61,11 @@ export class UsersComponent implements OnInit {
         ref.onClose.subscribe(data => this.getUsers());
     }
 
-    // openUserPage(user) {
-    //     this.userService.selectedUser = user;
-    //     console.log("Selected User: ", user);
-    //     this.router.navigateByUrl('/pages/users/user');
-    // }
+    openUserPage(user) {
+        this.userService.selectedUser = user;
+        console.log("Selected User: ", user);
+        this.router.navigateByUrl('/pages/users/user');
+    }
 
 	async getUsers() {
 		// this.loadingService.presentLoading();

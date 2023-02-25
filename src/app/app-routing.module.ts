@@ -34,7 +34,7 @@ import { QuestionComponent } from './pages/questionnaires/questions/question/que
                         component: UsersComponent
                     },
                     {
-                        path: 'user', 
+                        path: 'users/user', 
                         component: UserComponent
                     },
                     {

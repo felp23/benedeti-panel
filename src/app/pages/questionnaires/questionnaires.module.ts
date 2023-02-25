@@ -95,6 +95,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { AddQuestionComponent } from './questions/add-question/add-question.component';
 import { QuestionComponent } from './questions/question/question.component';
 import { AddAnswerComponent } from './questions/add-answer/add-answer.component';
+import { AnswerComponent } from './questions/answer/answer.component';
 
 @NgModule({
     imports: [
@@ -194,6 +195,7 @@ import { AddAnswerComponent } from './questions/add-answer/add-answer.component'
         AddQuestionComponent,
         QuestionComponent,
         AddAnswerComponent,
+        AnswerComponent,
     ],
     providers: [
         {

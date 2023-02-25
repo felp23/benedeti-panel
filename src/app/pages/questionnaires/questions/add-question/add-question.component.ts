@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
-import { AnswerService, QuestionService, SharedService } from 'src/app/services';
+import { Router } from '@angular/router';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AnswerService, QuestionService, QuizService, SharedService } from 'src/app/services';
 import { AddAnswerComponent } from '../add-answer/add-answer.component';
+import { AnswerComponent } from '../answer/answer.component';
 
 @Component({
     selector: 'app-add-question',
@@ -19,11 +21,23 @@ export class AddQuestionComponent implements OnInit {
     answers: any = [];
     filteredAnswers: any = [];
 
+    options = [
+        { label: 'Muito fácil', value: 1 },
+        { label: 'Fácil', value: 2 },
+        { label: 'Médio', value: 3 },
+        { label: 'Dificil', value: 4 },
+        { label: 'Muito dificil', value: 5 }
+    ];
+
+    selectedOption: boolean;
+
     constructor(
         public questionService: QuestionService,
         public sharedService: SharedService,
         public answerService: AnswerService,
-        public dialogService: DialogService
+        public dialogService: DialogService,
+        public quizService: QuizService,
+        public router: Router
     ) { }
 
     ngOnInit(): void {
@@ -39,13 +53,45 @@ export class AddQuestionComponent implements OnInit {
             },
             {
                 label:'Detalhes do quiz',
-                routerLink: ['/pages/questionnaires/quiz']
+                routerLink: ['/pages/quiz']
             },
             {
                 label:'Adicionar pergunta',
-                routerLink: ['/pages/questionnaires/quiz']
+                routerLink: ['/pages/add-quiz']
             },
         ];
+    }
+
+    addQuestion() {
+        this.questionService.newQuestion.questionQuizId = this.quizService.selectedQuiz.quizId;
+        console.log('Nova resposta:', this.answerService.newAnswer);
+        this.questionService.addQuestion().subscribe(data => 
+            this.checkReturn(data)
+        );
+    }
+
+    checkReturn(response) {
+        console.log('Resposta', response);   
+        if (response.success == true) {
+            this.editAnswersQuestionId(response.data.questionId);
+        }
+    }
+
+    editAnswersQuestionId(questionId) {
+        // this.questionService.newQuestion.questionQuizId = this.quizService.selectedQuiz.quizId;
+        console.log('ID:', questionId);
+        this.answerService.editAnswerQuestionId(questionId).subscribe(data => 
+            this.checkEditReturn(data)
+        );
+    } 
+
+    checkEditReturn(response) {
+        console.log('Resposta', response);   
+        if (response.success == true) {
+            this.questionService.newQuestion = {};
+            this.answerService.newAnswer = {};
+            this.router.navigateByUrl('/pages/questionnaires');
+        }
     }
 
     showAddAnswerDialog() {
@@ -54,7 +100,16 @@ export class AddQuestionComponent implements OnInit {
             width: '32%'
         });
 
-        // ref.onClose.subscribe(data => this.getQuestionnaires());
+        ref.onClose.subscribe(data => this.getAnswersByIdZero());
+    }
+
+    showAnswerDialog() {
+        const ref = this.dialogService.open(AnswerComponent, {
+            header: 'Detalhes da resposta',
+            width: '32%'
+        });
+
+        ref.onClose.subscribe(data => this.getAnswersByIdZero());
     }
 
 	async getAnswersByIdZero() {

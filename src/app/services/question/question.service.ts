@@ -27,7 +27,7 @@ export class QuestionService {
 		let URL = this.configService.baseURL + 'question/add-question';
 		return this.http.post<any>(URL, 
 		{
-			questionTestId: this.newQuestion.questionTestId,
+			questionQuizId: this.newQuestion.questionQuizId,
 			// questionChapterId: this.newQuestion.questionChapterId,
 			questionDescription: this.newQuestion.questionDescription,
 			questionDifficulty: this.newQuestion.questionDifficulty,
@@ -63,11 +63,11 @@ export class QuestionService {
             catchError(this.handleError('questions', [])));
     };
 
-    getQuestionsByTest(questionTestId): Observable<any> {
-        let URL = this.configService.baseURL + 'question/questions-by-test';
+    getQuestionsByQuizId(questionQuizId): Observable<any> {
+        let URL = this.configService.baseURL + 'question/questions-by-quiz';
         return this.http.post<any>(URL, 
         {
-            questionTestId: questionTestId
+            questionQuizId: questionQuizId
         })
         .pipe(
             tap(data => this.log(data)),
