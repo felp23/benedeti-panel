@@ -24,8 +24,8 @@ export class AddUserComponent implements OnInit {
     ];
     
     userLevel = [
-        { name: 'Administrador', code: 'Option 1' },
-        { name: 'Colaborador', code: 'Option 2' }
+        { name: 'Administrador', value: 1 },
+        { name: 'Usuário', value: 2 }
     ];
 
     constructor(
@@ -59,7 +59,7 @@ export class AddUserComponent implements OnInit {
 
 	verifyFields() {
         console.log('NewUser: ', this.userService.newUser);
-		if (!this.userService.newUser.userFirstname) {
+		if (!this.userService.newUser.userFirstName) {
 			this.customToast(
                 'warn',
 				'Você precisa inserir um nome de usuário válido.',
@@ -67,7 +67,7 @@ export class AddUserComponent implements OnInit {
 			);
 			return;
 		}
-		if (!this.userService.newUser.userLastname) {
+		if (!this.userService.newUser.userLastName) {
 			this.customToast(
                 'warn',
 				'Você precisa inserir um sobrenome válido.',
@@ -83,10 +83,18 @@ export class AddUserComponent implements OnInit {
 			);
 			return;
 		}
-		if (!this.userService.newUser.userPasscode) {
+		if (!this.userService.newUser.userPasscode || !this.userService.newUser.userConfirmPasscode) {
 			this.customToast(
                 'warn',
 				'Você precisa inserir uma senha válida.',
+                'bottom-center'
+			);
+			return;
+		}
+		if (this.userService.newUser.userPasscode != this.userService.newUser.userConfirmPasscode) {
+			this.customToast(
+                'warn',
+				'A senhas não são idênticas.',
                 'bottom-center'
 			);
 			return;
@@ -95,6 +103,7 @@ export class AddUserComponent implements OnInit {
 	}
 
     addUser() {
+        this.userService.newUser.userLevel = this.userService.newUser.userLevel.value;
         this.userService.addUser().subscribe(data => 
             this.checkReturn(data)
         );

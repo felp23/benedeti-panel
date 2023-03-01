@@ -3,7 +3,7 @@
 <div class="grid">
 	<div class="col-12">
         <div class="card">
-            <h5 class="m-0">Informações de {{user.userFirstname}} {{user.userLastname}}</h5>
+            <h5 class="m-0">Informações de {{selectedUser.userFirstName}} {{selectedUser.userLastName}}</h5>
             <br>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-6">
@@ -11,7 +11,7 @@
                     <input pInputText 
                            id="userFirstname" 
                            type="text" 
-                           [(ngModel)]="user.userFirstname"
+                           [(ngModel)]="selectedUser.userFirstName"
                            [readonly]="!allowEdit"/>
                 </div>
                 <div class="field col-12 md:col-6">
@@ -19,82 +19,35 @@
                     <input pInputText 
                            id="userLastname" 
                            type="text" 
-                           [(ngModel)]="user.userLastname"
+                           [(ngModel)]="selectedUser.userLastName"
                            [readonly]="!allowEdit"/>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>CPF</label>
-                    <p-inputMask mask="999.999.999-99" 
-                                 [(ngModel)]="user.userDocument" 
-                                 placeholder="999.999.999-99"
-                                 [readonly]="!allowEdit"></p-inputMask>
                 </div>
                 <div class="field col-6 md:col-6">
                     <label>Telefone</label>
                     <p-inputMask mask="(99) 99999-9999" 
-                                 [(ngModel)]="user.userPhone" 
+                                 [(ngModel)]="selectedUser.userPhone" 
                                  placeholder="(99) 99999-9999"
                                  [readonly]="!allowEdit"></p-inputMask>
                 </div>
                 <div class="field col-6 md:col-6">
                     <label>Data de nascimento</label>
                     <p-inputMask mask="99/99/9999" 
-                                 [(ngModel)]="user.userBirthdate" 
+                                 [(ngModel)]="selectedUser.userBirthdate" 
                                  placeholder="99/99/9999"
                                  [readonly]="!allowEdit"></p-inputMask>
                 </div>
-                <div class="field col-6 md:col-6">
-                    <label>CEP</label>
-                    <p-inputMask mask="99999-999" 
-                                 [(ngModel)]="user.userDocument" 
-                                 placeholder="99999-999"
-                                 [readonly]="!allowEdit"></p-inputMask>
-                </div>
-                <div class="field col-6">
-                    <label>Rua</label>
-                    <input pInputText 
-                           id="userAddress" 
-                           type="text" 
-                           [(ngModel)]="user.userAddress"
-                           [readonly]="!allowEdit"/>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>Número</label>
-                    <input pInputText 
-                           id="userAddressNumber"
-                           type="text" 
-                           [(ngModel)]="user.userAddressNumber"
-                           [readonly]="!allowEdit"/>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>Bairro</label>
-                    <input pInputText 
-                           id="userNeighborhood"
-                           type="text" 
-                           [(ngModel)]="user.userNeighborhood"
-                           [readonly]="!allowEdit"/>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>Cidade</label>
-                    <input pInputText 
-                           id="userCity"
-                           type="text" 
-                           [(ngModel)]="user.userCity"
-                           [readonly]="!allowEdit"/>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>Estado</label>
-                    <input pInputText 
-                           id="userState"
-                           type="text" 
-                           [(ngModel)]="user.userState"
-                           [readonly]="!allowEdit"/>
-                </div>
+                    <div class="field col-6 md:col-6">
+                        <label htmlFor="userLevel">E-mail</label>
+                        <input pInputText 
+                               type="text" 
+                               [(ngModel)]="selectedUser.userEmail"
+                               [readonly]="!allowEdit">
+                    </div>
                 <div class="field col-6 md:col-6">
                     <label>Nível de acesso</label>
                     <p-dropdown [options]="userLevel" 
                                 optionLabel="name" 
-                                [(ngModel)]="user.userLevel"
+                                [(ngModel)]="selectedUser.userLevel"
                                 [readonly]="!allowEdit"></p-dropdown>
                 </div>
             </div>

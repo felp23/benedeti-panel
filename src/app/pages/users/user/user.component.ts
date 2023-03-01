@@ -15,11 +15,11 @@ export class UserComponent implements OnInit {
 
     selectedState:any;
     userLevel = [
-        { name: 'Administrador', code: 'Option 1' },
-        { name: 'Colaborador', code: 'Option 2' }
+        { name: 'Administrador', value: 1 },
+        { name: 'Colaborador', value: 2 }
     ];
 
-    user: any = {};
+    selectedUser: any = {};
 
     constructor(
         public router: Router,
@@ -34,11 +34,11 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {
         this.updateBreadcrumb();
-        this.user = this.configService.cloneObject(this.userService.selectedUser);
+        this.selectedUser = this.configService.cloneObject(this.userService.selectedUser);
     }
 
     changeEdit() {
-        this.user = this.configService.cloneObject(this.userService.selectedUser);
+        this.selectedUser = this.configService.cloneObject(this.userService.selectedUser);
         this.allowEdit = !this.allowEdit;
     }
 
@@ -52,19 +52,19 @@ export class UserComponent implements OnInit {
     }
 
     editUser() {
-        // this.userService.editedUser = this.user;
-        // this.userService.editUser().subscribe(data => 
-        //     this.checkEditReturn(data)
-        // );
+        this.selectedUser.userLevel = this.selectedUser.userLevel.value;
+        this.userService.editUser(this.selectedUser).subscribe(data => 
+            this.checkEditReturn(data)
+        );
     }
 
     checkEditReturn(response) {
-        // console.log('Resposta', response);   
-        // if(response.success) {
-        //     this.sharedService.toastCustomSuccess('Usuário editado com sucesso');
-        //     this.userService.selectedUser = this.userService.editedUser;
-        //     this.changeEdit();
-        // }
+        console.log('Resposta', response);   
+        if(response.success) {
+            this.sharedService.toastCustomSuccess('Usuário editado com sucesso');
+            this.userService.selectedUser = this.userService.editedUser;
+            this.changeEdit();
+        }
     }
 
     deleteUser() {

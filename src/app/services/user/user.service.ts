@@ -15,6 +15,7 @@ export class UserService {
     users: any = [];
     newUser: any = {};
     selectedUser: any = {};
+    editedUser: any = {};
 
     constructor(
 		private http: HttpClient,
@@ -29,7 +30,9 @@ export class UserService {
             userLastName: this.newUser.userLastName,
             userEmail: this.newUser.userEmail,
             userPhone: this.newUser.userPhone,
+            userBirthdate: this.newUser.userBirthdate,
             userPasscode: this.newUser.userPasscode,
+            userLevel: this.newUser.userLevel
         })
         .pipe(
             tap(data => this.log(data)),
@@ -44,7 +47,10 @@ export class UserService {
             userFirstName: editedUser.userFirstName,
             userLastName: editedUser.userLastName,
             userEmail: editedUser.userEmail,
-            userPassword: editedUser.userPassword,
+            userPhone: editedUser.userPhone,
+            userBirthdate: editedUser.userBirthdate,
+            userPasscode: editedUser.userPasscode,
+            userLevel: editedUser.userLevel,
         })
         .pipe(
             tap(data => this.log(data)),
