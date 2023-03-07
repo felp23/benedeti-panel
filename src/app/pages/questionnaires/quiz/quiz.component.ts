@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
-import { AuthService, SharedService, ConfigService, StorageService, UserService } from 'src/app/services';
+import { AuthService, SharedService, ConfigService, StorageService, UserService, QuizService } from 'src/app/services';
+import { QuizModalComponent } from '../quiz-modal/quiz-modal.component';
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+    selector: 'app-quiz',
+    templateUrl: './quiz.component.html',
+    styleUrls: ['./quiz.component.scss']
 })
+
 export class QuizComponent implements OnInit {
 
     allowEdit: boolean = false;
@@ -19,44 +22,71 @@ export class QuizComponent implements OnInit {
         { name: 'Colaborador', code: 'Option 2' }
     ];
 
-    user: any = {};
+    quiz: any = {};
 
     constructor(
         public router: Router,
+        public dialogService: DialogService,
         private confirmationService: ConfirmationService,
         public configService: ConfigService,
         public authService: AuthService,
         public storageService: StorageService,
         public userService: UserService,
-        public sharedService: SharedService
+        public sharedService: SharedService,
+        public quizService: QuizService
     ) { 
     }
 
     ngOnInit(): void {
         this.updateBreadcrumb();
-        this.user = this.configService.cloneObject(this.userService.selectedUser);
+        this.quiz = this.configService.cloneObject(this.quizService.selectedQuiz);
+        if (this.quiz.quizStart == null) {
+            this.quiz.quizStart = 0
+        }
+        if (this.quiz.quizFinish == null) {
+            this.quiz.quizFinish = 0
+        }
     }
 
     changeEdit() {
-        this.user = this.configService.cloneObject(this.userService.selectedUser);
+        this.quiz = this.configService.cloneObject(this.quizService.selectedQuiz);
         this.allowEdit = !this.allowEdit;
     }
 
-    confirm() {
+    confirmDelete() {
         this.confirmationService.confirm({
-            message: 'Tem certeza que deseja apagar esse usuário?',
+            target: event.target,
+            message: 'Tem certeza que deseja apagar esse Quiz?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Sim',
+            rejectLabel: 'Não',
             accept: () => {
-                this.deleteUser();
+                this.deleteQuiz();
+            },
+            reject: () => {
+                //reject action
             }
         });
+        // this.confirmationService.confirm({
+        //     message: 'Tem certeza que deseja apagar esse usuário?',
+        //     accept: () => {
+        //         this.deleteUser();
+        //     }
+        // });
     }
 
-    editUser() {
-        // this.userService.editedUser = this.user;
-        // this.userService.editUser().subscribe(data => 
-        //     this.checkEditReturn(data)
-        // );
+    showEditQuizDialog() {
+        this.quizService.isEditable = true;
+        const ref = this.dialogService.open(QuizModalComponent, {
+            header: 'Editar questionário',
+            width: '32%'
+        });
+
+        ref.onClose.subscribe(data => 
+            this.quiz = this.quizService.selectedQuiz
+        );
     }
+
 
     checkEditReturn(response) {
         // console.log('Resposta', response);   
@@ -67,8 +97,8 @@ export class QuizComponent implements OnInit {
         // }
     }
 
-    deleteUser() {
-        this.userService.deleteUser().subscribe(data => 
+    deleteQuiz() {
+        this.quizService.deleteQuiz(this.quizService.selectedQuiz.quizId).subscribe(data => 
             this.checkDeleteReturn(data)
         );
     }
@@ -76,7 +106,7 @@ export class QuizComponent implements OnInit {
     checkDeleteReturn(response) {
         console.log('Resposta', response);   
         if(response.success) {
-            this.goTo('/pages/users');
+            this.goTo('/pages/questionnaires');
         }
     }
 

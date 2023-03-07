@@ -64,6 +64,7 @@ export class AddQuestionComponent implements OnInit {
 
     addQuestion() {
         this.questionService.newQuestion.questionQuizId = this.quizService.selectedQuiz.quizId;
+        // this.questionService.newQuestion.questionDescription = this.questionService.newQuestion.questionDescription.toString();
         console.log('Nova resposta:', this.answerService.newAnswer);
         this.questionService.addQuestion().subscribe(data => 
             this.checkReturn(data)
@@ -90,7 +91,7 @@ export class AddQuestionComponent implements OnInit {
         if (response.success == true) {
             this.questionService.newQuestion = {};
             this.answerService.newAnswer = {};
-            this.router.navigateByUrl('/pages/questionnaires');
+            this.router.navigateByUrl('/pages/quiz');
         }
     }
 

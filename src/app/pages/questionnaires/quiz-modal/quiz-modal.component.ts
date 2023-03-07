@@ -5,13 +5,15 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService, SharedService, ConfigService, StorageService, UserService, QuizService } from 'src/app/services';
 
 @Component({
-    selector: 'app-add-quiz',
-    templateUrl: './add-quiz.component.html',
-    styleUrls: ['./add-quiz.component.scss'],
+    selector: 'app-quiz-modal',
+    templateUrl: './quiz-modal.component.html',
+    styleUrls: ['./quiz-modal.component.scss'],
 })
 
-export class AddQuizComponent implements OnInit {
+export class QuizModalComponent implements OnInit {
 
+    quizName: string;
+    quizDescription: string;
     selectedState: any;
     toastPosition: '';
 
@@ -41,6 +43,10 @@ export class AddQuizComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if (this.quizService.isEditable == true) {
+            this.quizName = this.quizService.selectedQuiz.quizName;
+            this.quizDescription = this.quizService.selectedQuiz.quizDescription;
+        }
     }
     
     close() {
@@ -59,7 +65,7 @@ export class AddQuizComponent implements OnInit {
 
 	verifyFields() {
         console.log('NewQuiz: ', this.quizService.newQuiz);
-		if (!this.quizService.newQuiz.quizName) {
+		if (!this.quizName) {
 			this.customToast(
                 'warn',
 				'Você precisa inserir um nome válido.',
@@ -67,7 +73,19 @@ export class AddQuizComponent implements OnInit {
 			);
 			return;
 		}
-		this.addQuiz();
+        if (this.quizService.isEditable == false) {
+            this.quizService.newQuiz.quizName = this.quizName;
+            this.quizService.newQuiz.quizDescription = this.quizDescription;
+		    this.addQuiz();
+            this.router.navigateByUrl('/pages/questionnaires');
+            return
+        }
+        if (this.quizService.isEditable == true) {
+            this.quizService.selectedQuiz.quizName = this.quizName;
+            this.quizService.selectedQuiz.quizDescription = this.quizDescription;
+            this.editQuiz(this.quizService.selectedQuiz);
+            return
+        }
 	}
 
     addQuiz() {
@@ -76,11 +94,25 @@ export class AddQuizComponent implements OnInit {
         );
     }
 
+    editQuiz(editedQuiz) {
+        this.quizService.editQuiz(editedQuiz).subscribe(data => 
+            this.checkReturn(data)
+        );
+    }
+
     checkReturn(response) {
         console.log('Resposta', response);   
-        if (response.success == true) {
-            this.quizService.newQuiz = {};
-            this.ref.close(this.sharedService.toastAddSuccess());
+        if (this.quizService.isEditable == false) {
+            if (response.success == true) {
+                this.quizService.newQuiz = {};
+                this.ref.close(this.sharedService.toastAddSuccess());
+            }
+        }
+        if (this.quizService.isEditable == true) {
+            if (response.success == true) {
+                this.quizService.newQuiz = {};
+                this.ref.close(this.sharedService.toastAddSuccess());
+            }
         }
     }
 

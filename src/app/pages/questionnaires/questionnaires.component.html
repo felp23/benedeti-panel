@@ -41,13 +41,13 @@
                             Nome 
                             <p-sortIcon field="quizName"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="quizName">
-                            Realizados 
-                            <p-sortIcon field="quizName"></p-sortIcon>
+                        <th pSortableColumn="quizStart">
+                            Iniciados 
+                            <p-sortIcon field="quizStart"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="quizName">
+                        <th pSortableColumn="quizFinish">
                             Finalizados 
-                            <p-sortIcon field="quizName"></p-sortIcon>
+                            <p-sortIcon field="quizFinish"></p-sortIcon>
                         </th>
                     </tr>
                 </ng-template>
@@ -61,12 +61,12 @@
                             {{quiz.quizName}}
                         </td>
                         <td style="width:33%; min-width:10rem;" (click)="openQuizPage(quiz)">
-                            <span class="p-column-title">Sobrenome</span>
-                            {{quiz.quizName}}
+                            <span class="p-column-title">Iniciados</span>
+                            {{quiz.quizStart}}
                         </td>
                         <td style="width:33%; min-width:10rem;" (click)="openQuizPage(quiz)">
-                            <span class="p-column-title">E-mail</span>
-                            {{quiz.quizName}}
+                            <span class="p-column-title">Finalizados</span>
+                            {{quiz.quizFinish}}
                         </td>
                         <!-- <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
                             <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" />

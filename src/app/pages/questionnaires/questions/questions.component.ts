@@ -71,4 +71,7 @@ export class QuestionsComponent implements OnInit {
 		// this.loadingService.dismissLoading();
 	}
 
+    deleteQuiz() {
+
+    }
 }

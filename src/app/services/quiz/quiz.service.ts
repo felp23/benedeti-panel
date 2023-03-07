@@ -15,6 +15,7 @@ export class QuizService {
     questionnaires: any = [];
     newQuiz: any = {};
     selectedQuiz: any = {};
+    isEditable: boolean = false;
 
     constructor(
 		private http: HttpClient,
@@ -26,6 +27,7 @@ export class QuizService {
         return this.http.post<any>(URL, 
         {
             quizName: this.newQuiz.quizName,
+            quizDescription: this.newQuiz.quizDescription,
         })
         .pipe(
             tap(data => this.log(data)),
@@ -37,7 +39,8 @@ export class QuizService {
         return this.http.post<any>(URL, 
         {
             quizId: editedQuiz.quizId,
-            quizName: editedQuiz.quizName
+            quizName: editedQuiz.quizName,
+            quizDescription: editedQuiz.quizDescription
         })
         .pipe(
             tap(data => this.log(data)),

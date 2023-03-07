@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 // import { ProductService } from '../../service/productservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AddQuizComponent } from './add-quiz/add-quiz.component';
+import { QuizModalComponent } from './quiz-modal/quiz-modal.component';
 
 import { UserService, SharedService, QuizService } from 'src/app/services';
 import { Router } from '@angular/router';
@@ -58,7 +58,8 @@ export class QuestionnairesComponent implements OnInit {
     }
 
     showAddQuizDialog() {
-        const ref = this.dialogService.open(AddQuizComponent, {
+        this.quizService.isEditable = false;
+        const ref = this.dialogService.open(QuizModalComponent, {
             header: 'Novo questionário',
             width: '32%'
         });

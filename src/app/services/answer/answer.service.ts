@@ -27,6 +27,7 @@ export class AnswerService {
         let URL = this.configService.baseURL + 'answer/add-answer';
         return this.http.post<any>(URL, 
         {
+            answerQuizId: this.newAnswer.answerQuizId,
             answerQuestionId: this.newAnswer.answerQuestionId,
             answerDescription: this.newAnswer.answerDescription,
             answerIsCorrect: this.newAnswer.answerIsCorrect,

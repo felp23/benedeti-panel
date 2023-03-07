@@ -89,7 +89,7 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { QuizComponent } from './quiz/quiz.component';
-import { AddQuizComponent } from './add-quiz/add-quiz.component';
+import { QuizModalComponent } from './quiz-modal/quiz-modal.component';
 import { QuestionnairesComponent } from './questionnaires.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { AddQuestionComponent } from './questions/add-question/add-question.component';
@@ -189,7 +189,7 @@ import { AnswerComponent } from './questions/answer/answer.component';
 
         // CUSTOM COMPONENTS
         QuizComponent,
-        AddQuizComponent,
+        QuizModalComponent,
         QuestionnairesComponent,
         QuestionsComponent,
         AddQuestionComponent,

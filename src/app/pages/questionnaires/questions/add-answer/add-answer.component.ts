@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AnswerService, QuestionService, SharedService } from 'src/app/services';
+import { AnswerService, QuestionService, QuizService, SharedService } from 'src/app/services';
 
 @Component({
     selector: 'app-add-answer',
@@ -22,6 +22,7 @@ export class AddAnswerComponent implements OnInit {
         public questionService: QuestionService,
         public sharedService: SharedService,
         public ref: DynamicDialogRef,
+        public quizService: QuizService
     ) { }
 
     ngOnInit(): void {
@@ -34,6 +35,7 @@ export class AddAnswerComponent implements OnInit {
         if (!this.questionService.selectedQuestion.questionId) {
             this.answerService.newAnswer.answerQuestionId = 0;
         }
+        this.answerService.newAnswer.answerQuizId = this.quizService.selectedQuiz.quizId;
         console.log('Nova resposta:', this.answerService.newAnswer);
         this.answerService.addAnswer().subscribe(data => 
             this.checkReturn(data)

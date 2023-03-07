@@ -5,18 +5,33 @@
                 <label>Nome</label>
                 <input pInputText 
                         type="text" 
-                        [(ngModel)]="quizService.newQuiz.quizName"/>
+                        [(ngModel)]="quizName"/>    
+            </div>
+            <div class="field col-12 md:col-12">
+                <label>Descrição</label>
+                <textarea pInputTextarea 
+                        rows="5" 
+                        cols="30"
+                        [(ngModel)]="quizDescription"></textarea>
             </div>
         </div>
 	</div>
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
-            <div class="my-2">
+            <div class="my-2" *ngIf="!quizService.isEditable">
                 <button pButton 
                         pRipple 
                         label="Cadastrar" 
                         icon="pi pi-plus" 
                         class="p-button-success mr-2"
+                        (click)="verifyFields()"></button>
+            </div>
+            <div class="my-2" *ngIf="quizService.isEditable">
+                <button pButton 
+                        pRipple 
+                        label="Salvar" 
+                        icon="pi pi-check" 
+                        class="p-button-primary mr-2"
                         (click)="verifyFields()"></button>
             </div>
         </ng-template>
