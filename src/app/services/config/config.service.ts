@@ -23,6 +23,32 @@ export class ConfigService {
 
     // === DEFAULT
 
+    formatTimeWithSecondsToFront(datetime: any) {
+        console.log('DATETIME.CONFIG: ', datetime);
+        const data = new Date(datetime);
+        const hora = data.getHours();
+        const minutos = data.getMinutes();
+        const segundos = data.getSeconds();
+        const response: any = {
+            hour: hora,
+            minuts: minutos,
+            seconds: segundos
+        }
+        return response;
+    }
+
+    formatTimeToFront(datetime: any) {
+        console.log('DATETIME.CONFIG: ', datetime);
+        const data = new Date(datetime);
+        const hora = data.getHours();
+        const minutos = data.getMinutes();
+        const response: any = {
+            hour: hora,
+            minuts: minutos
+        }
+        return `${hora}:${minutos}`;
+    }
+
     getToday() {
         var today: any = new Date();
         var dd = String(today.getDate()).padStart(2, '0');

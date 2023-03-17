@@ -14,6 +14,13 @@
                         cols="30"
                         [(ngModel)]="quizDescription"></textarea>
             </div>
+            <div class="field col-12 md:col-12">
+                <label>Tempo de prova</label>
+                <p-calendar [(ngModel)]="quizTimeOut" 
+                            [timeOnly]="true" 
+                            [hourFormat]="24" 
+                            inputId="timeonly"></p-calendar>
+            </div>
         </div>
 	</div>
     <p-toolbar styleClass="mb-4">

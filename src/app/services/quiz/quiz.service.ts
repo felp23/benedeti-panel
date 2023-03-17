@@ -28,6 +28,7 @@ export class QuizService {
         {
             quizName: this.newQuiz.quizName,
             quizDescription: this.newQuiz.quizDescription,
+            quizTimeOut: this.newQuiz.quizTimeOut,
         })
         .pipe(
             tap(data => this.log(data)),

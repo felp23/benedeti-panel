@@ -14,6 +14,7 @@ export class QuizModalComponent implements OnInit {
 
     quizName: string;
     quizDescription: string;
+    quizTimeOut: string;
     selectedState: any;
     toastPosition: '';
 
@@ -44,8 +45,9 @@ export class QuizModalComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.quizService.isEditable == true) {
-            this.quizName = this.quizService.selectedQuiz.quizName;
-            this.quizDescription = this.quizService.selectedQuiz.quizDescription;
+            this.quizName = this.configService.cloneObject(this.quizService.selectedQuiz.quizName);
+            this.quizDescription = this.configService.cloneObject(this.quizService.selectedQuiz.quizDescription);
+            this.quizTimeOut = this.configService.cloneObject(this.quizService.selectedQuiz.quizTimeOut);
         }
     }
     
@@ -76,6 +78,8 @@ export class QuizModalComponent implements OnInit {
         if (this.quizService.isEditable == false) {
             this.quizService.newQuiz.quizName = this.quizName;
             this.quizService.newQuiz.quizDescription = this.quizDescription;
+            this.quizService.newQuiz.quizTimeOut = this.configService.formatTimeToFront(this.quizTimeOut);
+            console.log('QUIZ: ', this.quizService.newQuiz.quizTimeOut);
 		    this.addQuiz();
             this.router.navigateByUrl('/pages/questionnaires');
             return
@@ -83,37 +87,37 @@ export class QuizModalComponent implements OnInit {
         if (this.quizService.isEditable == true) {
             this.quizService.selectedQuiz.quizName = this.quizName;
             this.quizService.selectedQuiz.quizDescription = this.quizDescription;
+            this.quizService.selectedQuiz.quizTimeOut = this.configService.formatTimeToFront(this.quizTimeOut);
             this.editQuiz(this.quizService.selectedQuiz);
             return
         }
 	}
 
     addQuiz() {
-        this.quizService.addQuiz().subscribe(data => 
-            this.checkReturn(data)
+        this.quizService.addQuiz().subscribe(response => 
+            {
+                console.log('Resposta', response);   
+                if (this.quizService.isEditable == false) {
+                    if (response.success == true) {
+                        this.quizService.newQuiz = {};
+                        this.ref.close(this.sharedService.toastAddSuccess());
+                    }
+                }           
+            }
         );
     }
 
     editQuiz(editedQuiz) {
-        this.quizService.editQuiz(editedQuiz).subscribe(data => 
-            this.checkReturn(data)
+        this.quizService.editQuiz(editedQuiz).subscribe(response => 
+            {
+                if (this.quizService.isEditable == true) {
+                    if (response.success == true) {
+                        this.quizService.newQuiz = {};
+                        this.ref.close(this.sharedService.toastAddSuccess());
+                    }
+                } 
+            }
         );
-    }
-
-    checkReturn(response) {
-        console.log('Resposta', response);   
-        if (this.quizService.isEditable == false) {
-            if (response.success == true) {
-                this.quizService.newQuiz = {};
-                this.ref.close(this.sharedService.toastAddSuccess());
-            }
-        }
-        if (this.quizService.isEditable == true) {
-            if (response.success == true) {
-                this.quizService.newQuiz = {};
-                this.ref.close(this.sharedService.toastAddSuccess());
-            }
-        }
     }
 
 }
