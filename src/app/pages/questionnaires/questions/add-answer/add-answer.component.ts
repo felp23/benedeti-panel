@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AnswerService, QuestionService, QuizService, SharedService } from 'src/app/services';
+import { AnswerService, AuthService, QuestionService, QuizService, SharedService } from 'src/app/services';
 
 @Component({
     selector: 'app-add-answer',
@@ -22,10 +22,12 @@ export class AddAnswerComponent implements OnInit {
         public questionService: QuestionService,
         public sharedService: SharedService,
         public ref: DynamicDialogRef,
-        public quizService: QuizService
-    ) { }
+        public quizService: QuizService,
+        public authService: AuthService
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
     }
 
     addAnswer() {

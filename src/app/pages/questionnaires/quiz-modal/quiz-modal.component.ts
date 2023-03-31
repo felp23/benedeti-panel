@@ -40,10 +40,10 @@ export class QuizModalComponent implements OnInit {
         public storageService: StorageService,
         public quizService: QuizService,
         public sharedService: SharedService
-    ) { 
-    }
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         if (this.quizService.isEditable == true) {
             this.quizName = this.configService.cloneObject(this.quizService.selectedQuiz.quizName);
             this.quizDescription = this.configService.cloneObject(this.quizService.selectedQuiz.quizDescription);

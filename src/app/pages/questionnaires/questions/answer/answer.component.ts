@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AnswerService, SharedService } from 'src/app/services';
+import { AnswerService, AuthService, SharedService } from 'src/app/services';
 
 @Component({
     selector: 'app-answer',
@@ -19,10 +19,12 @@ export class AnswerComponent implements OnInit {
     constructor(
         public answerService: AnswerService,
         public ref: DynamicDialogRef,
-        public sharedService: SharedService
+        public sharedService: SharedService,
+        public authService: AuthService
         ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         this.editedAnswer = this.answerService.selectedAnswer;
         console.log("RESPOSTA: ", this.editedAnswer);
         this.options = [

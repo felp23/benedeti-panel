@@ -33,11 +33,11 @@ export class QuizComponent implements OnInit {
         public storageService: StorageService,
         public userService: UserService,
         public sharedService: SharedService,
-        public quizService: QuizService
-    ) { 
-    }
+        public quizService: QuizService,
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         this.updateBreadcrumb();
         this.quiz = this.configService.cloneObject(this.quizService.selectedQuiz);
         if (this.quiz.quizStart == null) {

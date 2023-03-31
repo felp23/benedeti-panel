@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { QuestionService, QuizService } from 'src/app/services';
+import { AuthService, QuestionService, QuizService } from 'src/app/services';
 import { AddQuestionComponent } from './add-question/add-question.component';
 
 @Component({
@@ -20,10 +20,12 @@ export class QuestionsComponent implements OnInit {
                 public dialogService: DialogService,
                 public questionService: QuestionService,
                 public quizService: QuizService,
-                public router: Router
+                public router: Router,
+                public authService: AuthService
         ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         this.getQuestionsByQuizId();
     }
 

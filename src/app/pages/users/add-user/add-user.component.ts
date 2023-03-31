@@ -37,10 +37,10 @@ export class AddUserComponent implements OnInit {
         public storageService: StorageService,
         public userService: UserService,
         public sharedService: SharedService
-    ) { 
-    }
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
     }
     
     close() {

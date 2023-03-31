@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AnswerService, QuestionService, QuizService, SharedService } from 'src/app/services';
+import { AnswerService, AuthService, QuestionService, QuizService, SharedService } from 'src/app/services';
 import { AddAnswerComponent } from '../add-answer/add-answer.component';
 import { AnswerComponent } from '../answer/answer.component';
 
@@ -37,10 +37,12 @@ export class AddQuestionComponent implements OnInit {
         public answerService: AnswerService,
         public dialogService: DialogService,
         public quizService: QuizService,
-        public router: Router
-    ) { }
+        public router: Router,
+        public authService: AuthService
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         this.updateBreadcrumb();
         this.getAnswersByIdZero();
     }

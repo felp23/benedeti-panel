@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddUserComponent } from './add-user/add-user.component';
 
-import { UserService, SharedService } from 'src/app/services';
+import { UserService, SharedService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
 
 import {BreadcrumbModule} from 'primeng/breadcrumb';
@@ -33,10 +33,12 @@ export class UsersComponent implements OnInit {
                 public router: Router,
                 public dialogService: DialogService,
                 public userService: UserService,
-                public sharedService: SharedService
-    ) {}
+                public sharedService: SharedService,
+                public authService: AuthService
+        ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.authService.checkAuth();
         this.getUsers();
         console.log('Users: ', this.users);
 

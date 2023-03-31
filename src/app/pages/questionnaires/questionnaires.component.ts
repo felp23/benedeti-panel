@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { QuizModalComponent } from './quiz-modal/quiz-modal.component';
 
-import { UserService, SharedService, QuizService } from 'src/app/services';
+import { UserService, SharedService, QuizService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
 
 import {BreadcrumbModule} from 'primeng/breadcrumb';
@@ -34,10 +34,12 @@ export class QuestionnairesComponent implements OnInit {
                 public dialogService: DialogService,
                 public userService: UserService,
                 public sharedService: SharedService,
-                public quizService: QuizService
-    ) {}
+                public quizService: QuizService,
+                public authService: AuthService
+        ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.authService.checkAuth();
         this.getQuestionnaires();
         console.log('Users: ', this.questionnaires);
 

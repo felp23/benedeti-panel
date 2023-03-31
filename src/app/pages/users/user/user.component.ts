@@ -29,10 +29,10 @@ export class UserComponent implements OnInit {
         public storageService: StorageService,
         public userService: UserService,
         public sharedService: SharedService
-    ) { 
-    }
+        ) { }
 
     ngOnInit(): void {
+        this.authService.checkAuth();
         this.updateBreadcrumb();
         this.selectedUser = this.configService.cloneObject(this.userService.selectedUser);
     }

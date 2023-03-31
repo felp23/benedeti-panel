@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
 
-	storageKey: any = 'benedeti2022';
+	storageKey: any = 'benedeti_panel';
 
   	constructor() { }
 
