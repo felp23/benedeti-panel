@@ -41,31 +41,29 @@
                     </div>
                     <div class="field col-6 md:col-6">
                         <label htmlFor="userLevel">Senha</label>
-                        <input pInputText 
-                               type="text" 
-                               [(ngModel)]="userService.newUser.userPasscode">
+                        <p-password [(ngModel)]="userService.newUser.userPasscode" 
+                                    [feedback]="false"></p-password>  
                     </div>
                     <div class="field col-6 md:col-6">
                         <label htmlFor="userLevel">Confirmar senha</label>
-                        <input pInputText 
-                               type="text" 
-                               [(ngModel)]="userService.newUser.userConfirmPasscode">
+                        <p-password [(ngModel)]="userService.newUser.userConfirmPasscode" 
+                                    [feedback]="false"></p-password>  
                     </div>
                 </div>
             </p-tabPanel>
-        </p-tabView>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Cadastrar" 
+                                icon="pi pi-plus" 
+                                class="p-button-success mr-2"
+                                (click)="verifyFields()"></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+        </p-tabView>    
 	</div>
-    <p-toolbar styleClass="mb-4">
-        <ng-template pTemplate="left">
-            <div class="my-2">
-                <button pButton 
-                        pRipple 
-                        label="Cadastrar" 
-                        icon="pi pi-plus" 
-                        class="p-button-success mr-2"
-                        (click)="verifyFields()"></button>
-            </div>
-        </ng-template>
-    </p-toolbar>
     <p-toast [position]="toastPosition" key="ct" life="10000"></p-toast>
 </div>

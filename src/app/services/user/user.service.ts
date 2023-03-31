@@ -57,11 +57,11 @@ export class UserService {
             catchError(this.handleError('users', [])));
     }
 
-    deleteUser(): Observable<any> {
+    deleteUser(userId): Observable<any> {
         let URL = this.configService.baseURL + 'user/delete-user';
         return this.http.post<any>(URL, 
         {
-            userId: this.selectedUser.userId
+            userId: userId
         })
         .pipe(
             tap(data => this.log(data)),

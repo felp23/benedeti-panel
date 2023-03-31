@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { 
+    Component, 
+    OnInit 
+} from '@angular/core';
+import { 
+    ConfirmationService, 
+    MessageService 
+} from 'primeng/api';
 
-import { AuthService, SharedService, ConfigService, StorageService, UserService, ToasterService } from 'src/app/services';
+import { 
+    AuthService, 
+    SharedService, 
+    ConfigService, 
+    StorageService, 
+    UserService, 
+    ToasterService 
+} from 'src/app/services';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+    selector: 'app-work',
+    templateUrl: './work.component.html',
+    styleUrls: ['./work.component.scss']
 })
-export class UserComponent implements OnInit {
+
+export class WorkComponent implements OnInit {
 
     allowEdit: boolean = false;
 

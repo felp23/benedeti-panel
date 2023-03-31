@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../config/config.service';
+import { MessageService } from 'primeng/api';
 // import { NbToastrService, NbIconConfig, NbGlobalLogicalPosition } from '@nebular/theme';
 
 @Injectable({
@@ -18,21 +19,29 @@ export class ToasterService {
 
     constructor(private http: HttpClient,
                 public configService: ConfigService,
+                public messageService: MessageService
                 // private toastrService: NbToastrService
                 ) 
     { 
     }  
 
-    showToast(title, subtitle, style) {
-        // this.toastrService.show(
-        //     subtitle,
-        //     title,
-        //     {   
-        //         position: NbGlobalLogicalPosition.TOP_END, 
-        //         status: style,
-        //         destroyByClick: true,
-        //         icon: 'alert-circle-outline'
-        //     },
-        // );
+    showSuccessToast(label) {
+        this.messageService.add(
+            {
+                severity:'success', 
+                summary: 'Sucesso!', 
+                detail: label
+            }
+        );
+    };
+
+    showErrorToast(label) {
+        this.messageService.add(
+            {
+                severity:'error', 
+                summary: 'Atenção!', 
+                detail: label
+            }
+        );
     };
 }

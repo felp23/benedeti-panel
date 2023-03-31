@@ -88,6 +88,7 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { BlockViewer } from './components/blockviewer/blockviewer.component';
+import { EditorModule } from 'primeng/editor';
  
 import { AppCodeModule } from './components/app-code/app.code.component';
 import { AppComponent } from './app.component';
@@ -149,9 +150,13 @@ import { UsersComponent } from './pages/users/users.component';
 import { AddUserComponent } from './pages/users/add-user/add-user.component';
 import { UsersModule } from './pages/users/users.module';
 import { QuestionnairesModule } from './pages/questionnaires/questionnaires.module';
+import { WorksComponent } from './pages/works/works.component';
+import { AddWorkComponent } from './pages/works/add-work/add-work.component';
+import { WorkComponent } from './pages/works/work/work.component';
 
 @NgModule({
     imports: [
+        EditorModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,
@@ -285,6 +290,9 @@ import { QuestionnairesModule } from './pages/questionnaires/questionnaires.modu
         NotfoundComponent,
         AccessComponent,
 
+        AddWorkComponent,
+        WorksComponent,
+        WorkComponent
         // CUSTOM COMPONENTS
         // LoginComponent,
         // UserComponent,

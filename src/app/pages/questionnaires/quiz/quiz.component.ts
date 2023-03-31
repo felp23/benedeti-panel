@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { AuthService, SharedService, ConfigService, StorageService, UserService, QuizService } from 'src/app/services';
@@ -34,6 +34,7 @@ export class QuizComponent implements OnInit {
         public userService: UserService,
         public sharedService: SharedService,
         public quizService: QuizService,
+        private messageService: MessageService,
         ) { }
 
     ngOnInit(): void {
@@ -99,15 +100,13 @@ export class QuizComponent implements OnInit {
 
     deleteQuiz() {
         this.quizService.deleteQuiz(this.quizService.selectedQuiz.quizId).subscribe(data => 
-            this.checkDeleteReturn(data)
+            {
+                console.log('Resposta', data);   
+                if(data.success) {
+                    this.goTo('/pages/questionnaires');
+                }
+            }
         );
-    }
-
-    checkDeleteReturn(response) {
-        console.log('Resposta', response);   
-        if(response.success) {
-            this.goTo('/pages/questionnaires');
-        }
     }
 
     updateBreadcrumb() {
