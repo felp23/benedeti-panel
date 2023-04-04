@@ -11,3 +11,4 @@ export * from './quiz/quiz.service';
 export * from './answer/answer.service';
 export * from './simulated/simulated.service';
 export * from './shared/shared.service';
+export * from './post/post.service';

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 // import { ProductService } from '../../service/productservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AddWorkComponent } from './add-work/add-work.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 import { UserService, SharedService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 @Component({
-    selector: 'app-works',
-    templateUrl: './works.component.html',
-    styleUrls: ['./works.component.scss']
+    selector: 'app-posts',
+    templateUrl: './posts.component.html',
+    styleUrls: ['./posts.component.scss']
 })
 
-export class WorksComponent implements OnInit {
+export class PostsComponent implements OnInit {
 
     submitted: boolean;
     statuses: any[];
@@ -55,13 +55,14 @@ export class WorksComponent implements OnInit {
         ];
     }
 
-    showAddUserDialog() {
-        const ref = this.dialogService.open(AddWorkComponent, {
-            header: 'Novo usuário',
-            width: '70%'
-        });
+    openAddPostPage() {
+        this.router.navigateByUrl('/pages/add-post');
+        // const ref = this.dialogService.open(AddWorkComponent, {
+        //     header: 'Novo usuário',
+        //     // width: '70%'
+        // });
 
-        ref.onClose.subscribe(data => this.getUsers());
+        // ref.onClose.subscribe(data => this.getUsers());
     }
 
     openUserPage(user) {

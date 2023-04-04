@@ -1,0 +1,59 @@
+
+<div class="p-fluid p-formgrid grid">
+    <div class="field col-12 md:col-12">
+        <div class="field col-12 md:col-12">
+            <label>Descrição da imagem</label>
+            <textarea pInputText maxlength="10000" [(ngModel)]="imageDescription"></textarea>
+        </div>
+        <!-- <div class="field col-12 md:col-12">
+            <h1>Enviar arquivo</h1>
+                <input nbInput 
+                       fullWidth 
+                       type="file" 
+                       name="imagem" 
+                       (change)="selecionarArquivo($event)">
+                <button type="submit"
+                        (click)="uploadImage()">Enviar</button>
+        </div> -->
+    </div>
+    <div *ngIf="!imageSrc">
+        <div class="field col-12 md:col-12">
+            <label>Selecione uma imagem</label>
+            <!-- <img src="{{configService.imageURL + image.workImageFilename}}"> -->
+        </div>
+        <div class="field col-12 md:col-12">
+            <input nbInput 
+                fullWidth 
+                name="imageUrl" 
+                type="file" 
+                accept="image/*" 
+                (change)="handleInputChange($event)"/>
+        </div>
+    </div>
+</div>
+<div *ngIf="imageSrc" >
+    <div class="field col-12 md:col-12">
+        <img src="{{imageSrc}}" style="max-width: 400px;">
+    </div>
+    <div class="field col-12 md:col-12">
+        <label class="label">Alterar</label>
+        <input nbInput 
+               fullWidth 
+               name="imageUrl" 
+               type="file" 
+               accept="image/*" 
+               (change)="handleInputChange($event)"/>
+    </div>
+</div>
+<p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <div class="my-2">
+            <button pButton 
+                    pRipple 
+                    label="Adicionar Imagem" 
+                    icon="pi pi-plus" 
+                    class="p-button-success mr-2"
+                    (click)="uploadImage()"></button>
+        </div>
+    </ng-template>
+</p-toolbar>

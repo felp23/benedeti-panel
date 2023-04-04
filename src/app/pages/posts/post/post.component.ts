@@ -18,12 +18,12 @@ import {
 } from 'src/app/services';
 
 @Component({
-    selector: 'app-work',
-    templateUrl: './work.component.html',
-    styleUrls: ['./work.component.scss']
+    selector: 'app-post',
+    templateUrl: './post.component.html',
+    styleUrls: ['./post.component.scss']
 })
 
-export class WorkComponent implements OnInit {
+export class PostComponent implements OnInit {
 
     allowEdit: boolean = false;
 

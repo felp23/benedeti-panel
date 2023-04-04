@@ -15,8 +15,9 @@ import { QuestionnairesComponent } from './pages/questionnaires/questionnaires.c
 import { QuizComponent } from './pages/questionnaires/quiz/quiz.component';
 import { AddQuestionComponent } from './pages/questionnaires/questions/add-question/add-question.component';
 import { QuestionComponent } from './pages/questionnaires/questions/question/question.component';
-import { WorksComponent } from './pages/works/works.component';
-import { WorkComponent } from './pages/works/work/work.component';
+import { PostsComponent } from './pages/posts/posts.component';
+import { PostComponent } from './pages/posts/post/post.component';
+import { AddPostComponent } from './pages/posts/add-post/add-post.component';
 
 // CUSTOM COMPONENTS
 
@@ -25,7 +26,8 @@ import { WorkComponent } from './pages/works/work/work.component';
     imports: [
         RouterModule.forRoot([
             {
-                path: 'pages', component: AppMainComponent,
+                path: 'pages', 
+                component: AppMainComponent,
                 children: [
                     {
                         path: 'dashboard', 
@@ -40,12 +42,16 @@ import { WorkComponent } from './pages/works/work/work.component';
                         component: UserComponent
                     },
                     {
-                        path: 'works', 
-                        component: WorksComponent
+                        path: 'add-post', 
+                        component: AddPostComponent
                     },
                     {
-                        path: 'works/work', 
-                        component: WorkComponent
+                        path: 'posts', 
+                        component: PostsComponent
+                    },
+                    {
+                        path: 'posts/post', 
+                        component: PostComponent
                     },
                     {
                         path: 'questionnaires', 

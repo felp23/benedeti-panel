@@ -48,9 +48,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'Site',
                 items:[
                     {
-                        label: 'Serviços',
+                        label: 'Postagens',
                         icon: 'pi pi-fw pi-home', 
-                        routerLink: ['/pages/works']
+                        routerLink: ['/pages/posts']
                     },
                     {
                         label: 'Newsletter',

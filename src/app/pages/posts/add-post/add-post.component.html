@@ -1,0 +1,103 @@
+<p-breadcrumb [model]="sharedService.items" [home]="sharedService.home"></p-breadcrumb>
+<br>
+<div class="grid">
+	<div class="col-12">
+        <div class="card">
+            <h5 class="m-0">Informações</h5>
+            <br>
+            <p-tabView>
+                <p-tabPanel header="Infromações" tabId="2">
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-12 md:col-12">
+                            <label>Nome</label>
+                            <input pInputText 
+                                    type="text" 
+                                    [(ngModel)]="userService.newUser.userFirstName"/>
+                        </div>
+                        <div class="field col-12 md:col-12">
+                            <label>Descrição</label>
+                            <p-editor [style]="{ height: '320px' }"></p-editor>
+                        </div>
+                    </div>
+                    <p-toolbar styleClass="mb-4">
+                        <ng-template pTemplate="left">
+                            <div class="my-2">
+                                <button pButton 
+                                        pRipple 
+                                        label="Cadastrar" 
+                                        icon="pi pi-plus" 
+                                        class="p-button-success mr-2"
+                                        (click)="verifyFields()"></button>
+                            </div>
+                        </ng-template>
+                    </p-toolbar>
+                </p-tabPanel>
+                          
+                <p-tabPanel header="Imagens" tabId="2">
+                    
+                    <div *ngIf="images"                              
+                          class="grid">
+                        <div *ngFor="let image of images; let index = index" 
+                             class="col-3" 
+                             key="index"
+                             style="width: 300px;
+                                    height: 300px;
+                                    background-image: url('{{image.imageSrc}}');
+                                    background-size:contain;
+                                    background-repeat: no-repeat;"
+                             (click)="imageClick(index)">
+                            <!-- <img [src]="image.imageSrc" 
+                                 [alt]="image.alt" 
+                                 style="cursor: pointer;" 
+                                 (click)="imageClick(index)"/> -->
+                        </div>
+                    </div>
+                    <p-galleria
+                        [(value)]="images"
+                        [(visible)]="displayCustom"
+                        [(activeIndex)]="activeIndex"
+                        [responsiveOptions]="responsiveOptions"
+                        [containerStyle]="{ 'max-width': '850px' }"
+                        [numVisible]="7"
+                        [circular]="true"
+                        [fullScreen]="true"
+                        [showItemNavigators]="true"
+                        [showThumbnails]="true">
+                        <ng-template pTemplate="item" style="display: block;" let-item>
+                            <img [src]="item.imageSrc" style="width: 100%; display: block;"/>
+                            <div style="position:absolute;
+                                        display: block;
+                                        overflow: hidden;
+                                        width: 100%;
+                                        bottom: 0;
+                                        background-color: rgba(0, 0, 0, 0.541);
+                                        color: #FFF;">
+                                <h1 style="word-wrap: break-word;
+                                           text-align: center;
+                                           font-size: 16px;">{{item.postImageDescription}}</h1>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="thumbnail" let-item>
+                            <div class="grid grid-nogutter justify-content-center">
+                                <img [src]="item.imageSrc" style="display: block; width: 20%;" />
+                            </div>
+                        </ng-template>
+                    </p-galleria>
+        
+        
+                    <p-toolbar styleClass="mb-4">
+                        <ng-template pTemplate="left">
+                            <div class="my-2">
+                                <button pButton 
+                                        pRipple 
+                                        label="Adicionar Imagem" 
+                                        icon="pi pi-plus" 
+                                        class="p-button-success mr-2"
+                                        (click)="showAddImage()"></button>
+                            </div>
+                        </ng-template>
+                    </p-toolbar>
+                </p-tabPanel>
+            </p-tabView>  
+    </div>
+</div>

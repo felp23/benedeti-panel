@@ -150,9 +150,10 @@ import { UsersComponent } from './pages/users/users.component';
 import { AddUserComponent } from './pages/users/add-user/add-user.component';
 import { UsersModule } from './pages/users/users.module';
 import { QuestionnairesModule } from './pages/questionnaires/questionnaires.module';
-import { WorksComponent } from './pages/works/works.component';
-import { AddWorkComponent } from './pages/works/add-work/add-work.component';
-import { WorkComponent } from './pages/works/work/work.component';
+import { PostsComponent } from './pages/posts/posts.component';
+import { AddPostComponent } from './pages/posts/add-post/add-post.component';
+import { PostComponent } from './pages/posts/post/post.component';
+import { AddImageComponent } from './pages/shared/add-image/add-image.component';
 
 @NgModule({
     imports: [
@@ -290,9 +291,10 @@ import { WorkComponent } from './pages/works/work/work.component';
         NotfoundComponent,
         AccessComponent,
 
-        AddWorkComponent,
-        WorksComponent,
-        WorkComponent
+        AddPostComponent,
+        PostsComponent,
+        PostComponent,
+        AddImageComponent
         // CUSTOM COMPONENTS
         // LoginComponent,
         // UserComponent,
