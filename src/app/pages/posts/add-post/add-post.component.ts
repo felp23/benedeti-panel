@@ -75,6 +75,21 @@ export class AddPostComponent implements OnInit {
         this.updateBreadcrumb();
     }
 
+    addPost() {
+        if (this.images) {
+            this.postService.newPost.postImages = JSON.stringify(this.images);
+        }
+        this.postService.newPost.postDescription = this.postService.newPost.postDescription.replace(/\\/g, '');
+        console.log('NewPost: ', this.postService.newPost);
+        this.postService.addPost().subscribe(response => {
+            console.log('Resposta: ', response);
+            if (response.success) {
+                this.router.navigateByUrl('/pages/posts');
+                this.sharedService.toastCustomSuccess('Post adicionado com sucesso');
+            }
+        })
+    }
+
     showAddImage() {
         const ref = this.dialogService.open(AddImageComponent, {
             header: "Selecione uma imagem",
@@ -85,6 +100,13 @@ export class AddPostComponent implements OnInit {
         });
     }
     
+    removeItemFromArray(filename: string) {
+        const newArray = this.images.filter((item) => item.postImageFilename !== filename);
+        this.images = newArray;
+        console.log('NOVO ARRAY: ', this.images);
+        this.displayCustom = false;
+    }
+
     getImages(response) {
         this.images = this.configService.cloneObject(response);
         console.log('IMAGENS: ', this.images);

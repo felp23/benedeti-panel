@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddPostComponent } from './add-post/add-post.component';
 
-import { UserService, SharedService, AuthService } from 'src/app/services';
+import { UserService, SharedService, AuthService, PostService } from 'src/app/services';
 import { Router } from '@angular/router';
 
 import {BreadcrumbModule} from 'primeng/breadcrumb';
@@ -35,12 +35,13 @@ export class PostsComponent implements OnInit {
         public dialogService: DialogService,
         public userService: UserService,
         public sharedService: SharedService,
-        public authService: AuthService
+        public authService: AuthService,
+        public postService: PostService
         ) { }
 
     ngOnInit(): void {
         this.authService.checkAuth();
-        this.getUsers();
+        this.getPosts();
         console.log('Users: ', this.users);
 
         this.updateBreadcrumb();
@@ -49,10 +50,20 @@ export class PostsComponent implements OnInit {
     updateBreadcrumb() {
         this.sharedService.items = [
             {
-                label:'Lista de usuários',
-                routerLink: ['/pages/users']
+                label:'Lista de posts',
+                routerLink: ['/pages/posts']
             },
         ];
+    }
+    
+    getPosts() {
+        this.postService.getPosts().subscribe(response => {
+            console.log("RESPOSTAS: ", response);
+            if (response.success) {
+                this.postService.posts = response.data;
+            }
+            console.log("POSTS: ", this.postService.posts);
+        })
     }
 
     openAddPostPage() {
@@ -71,19 +82,7 @@ export class PostsComponent implements OnInit {
         this.router.navigateByUrl('/pages/users/user');
     }
 
-	async getUsers() {
-		// this.loadingService.presentLoading();
-		await this.userService.getUsers()
-			.toPromise()
-				.then(data => {
-					console.log(data);
-                    this.users = data;
-                    this.filteredUsers = data;
-				}, err => {
-					console.log(err);
-				});
-		// this.loadingService.dismissLoading();
-	}
+
 
     getItems(searchbar) {
         // console.log('Searchbar: ', searchbar.srcElement.value);

@@ -11,7 +11,7 @@ import { ConfigService } from '../config/config.service';
 
 export class PostService {
 
-    works: any = [];
+    posts: any = [];
 	selectedWork: any = [];
     selectedSubwork: any = [];
 	newPost: any = [];
@@ -29,13 +29,22 @@ export class PostService {
         let URL = this.configService.baseURL + 'post/add-post';
         return this.http.post<any>(URL, 
         {
-            postName: this.newPost.postName,
+            postTitle: this.newPost.postTitle,
             postDescription: this.newPost.postDescription,
             postImages: this.newPost.postImages,
         })
         .pipe(
             tap(data => this.log(data)),
             catchError(this.handleError('works', [])));
+    }
+
+    getPosts(): Observable<any> {
+        let URL = this.configService.baseURL + 'post/posts';
+        return this.http.post<any>(URL, 
+        {})
+        .pipe(
+            tap(data => this.log(data)),
+            catchError(this.handleError('posts', [])));
     }
 
     uploadImage(image): Observable<any> {
@@ -66,17 +75,6 @@ export class PostService {
         return this.http.post<any>(URL, 
         {
             workId: workId,
-        })
-        .pipe(
-            tap(data => this.log(data)),
-            catchError(this.handleError('works', [])));
-    }
-
-    getworksByQuestion(workQuestionId): Observable<any> {
-        let URL = this.configService.baseURL + 'work/works-by-question';
-        return this.http.post<any>(URL, 
-        {
-            workQuestionId: workQuestionId
         })
         .pipe(
             tap(data => this.log(data)),

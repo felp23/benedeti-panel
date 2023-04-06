@@ -9,14 +9,15 @@
                 <p-tabPanel header="Infromações" tabId="2">
                     <div class="p-fluid p-formgrid grid">
                         <div class="field col-12 md:col-12">
-                            <label>Nome</label>
+                            <label>Titulo</label>
                             <input pInputText 
                                     type="text" 
-                                    [(ngModel)]="userService.newUser.userFirstName"/>
+                                    [(ngModel)]="postService.newPost.postTitle"/>
                         </div>
                         <div class="field col-12 md:col-12">
                             <label>Descrição</label>
-                            <p-editor [style]="{ height: '320px' }"></p-editor>
+                            <p-editor [style]="{ height: '320px' }"
+                                      [(ngModel)]="postService.newPost.postDescription"></p-editor>
                         </div>
                     </div>
                     <p-toolbar styleClass="mb-4">
@@ -27,7 +28,7 @@
                                         label="Cadastrar" 
                                         icon="pi pi-plus" 
                                         class="p-button-success mr-2"
-                                        (click)="verifyFields()"></button>
+                                        (click)="addPost()"></button>
                             </div>
                         </ng-template>
                     </p-toolbar>
@@ -74,7 +75,13 @@
                                         color: #FFF;">
                                 <h1 style="word-wrap: break-word;
                                            text-align: center;
-                                           font-size: 16px;">{{item.postImageDescription}}</h1>
+                                           font-size: 16px;">
+                                    {{item.postImageDescription}}
+                                </h1>
+                                <div style="position: absolute; bottom: 5px; right: 5px;"
+                                     (click)="removeItemFromArray(item.postImageFilename)">
+                                    <i class="pi pi-trash" style="color: rgb(255, 255, 255); cursor: pointer;">Apagar</i>
+                                </div>
                             </div>
                         </ng-template>
                         <ng-template pTemplate="thumbnail" let-item>
