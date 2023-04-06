@@ -32,6 +32,7 @@ export class PostService {
             postTitle: this.newPost.postTitle,
             postDescription: this.newPost.postDescription,
             postImages: this.newPost.postImages,
+            postCarousel: this.newPost.postCarousel,
         })
         .pipe(
             tap(data => this.log(data)),

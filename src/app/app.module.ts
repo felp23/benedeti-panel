@@ -246,7 +246,8 @@ import { AddImageComponent } from './pages/shared/add-image/add-image.component'
         AppCodeModule,
         StyleClassModule,
         UsersModule,
-        QuestionnairesModule
+        QuestionnairesModule,
+        SelectButtonModule
     ],
     declarations: [
         AppComponent,

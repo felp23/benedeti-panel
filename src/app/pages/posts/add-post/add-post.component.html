@@ -7,17 +7,24 @@
             <br>
             <p-tabView>
                 <p-tabPanel header="Infromações" tabId="2">
-                    <div class="p-fluid p-formgrid grid">
-                        <div class="field col-12 md:col-12">
+                    <div class="p-fluid 
+                                p-formgrid 
+                                grid">
+                        <div class="field 
+                                    col-12 
+                                    md:col-12">
                             <label>Titulo</label>
                             <input pInputText 
                                     type="text" 
                                     [(ngModel)]="postService.newPost.postTitle"/>
                         </div>
-                        <div class="field col-12 md:col-12">
+                        <div class="field 
+                                    col-12 
+                                    md:col-12">
                             <label>Descrição</label>
                             <p-editor [style]="{ height: '320px' }"
-                                      [(ngModel)]="postService.newPost.postDescription"></p-editor>
+                                      [(ngModel)]="postService.newPost.postDescription">
+                            </p-editor>
                         </div>
                     </div>
                     <p-toolbar styleClass="mb-4">
@@ -30,12 +37,37 @@
                                         class="p-button-success mr-2"
                                         (click)="addPost()"></button>
                             </div>
+                            <div class="flex flex-wrap gap-3">
+                                <div class="flex align-items-center">
+                                    <label for="postCarrousel" 
+                                           class="ml-2"
+                                           style="margin-right: 5px;">
+                                        Exibir post no carrossel?
+                                    </label>
+                                    <p-selectButton [options]="stateOptions" 
+                                                    [(ngModel)]="value" 
+                                                    optionLabel="label" 
+                                                    optionValue="value">
+                                    </p-selectButton>
+                                </div>
+                                <div class="flex align-items-center">
+                                    <label for="postCarrousel" 
+                                           class="ml-2"
+                                           style="margin-right: 5px;">
+                                        Exibir a primeira imagem como capa?
+                                    </label>
+                                    <p-selectButton [options]="stateOptions" 
+                                                    [(ngModel)]="value" 
+                                                    optionLabel="label" 
+                                                    optionValue="value">
+                                    </p-selectButton>
+                                </div>
+                            </div>
                         </ng-template>
                     </p-toolbar>
-                </p-tabPanel>
-                          
-                <p-tabPanel header="Imagens" tabId="2">
-                    
+                </p-tabPanel>                          
+                <p-tabPanel header="Imagens" 
+                            tabId="2">                    
                     <div *ngIf="images"                              
                           class="grid">
                         <div *ngFor="let image of images; let index = index" 
@@ -53,19 +85,22 @@
                                  (click)="imageClick(index)"/> -->
                         </div>
                     </div>
-                    <p-galleria
-                        [(value)]="images"
-                        [(visible)]="displayCustom"
-                        [(activeIndex)]="activeIndex"
-                        [responsiveOptions]="responsiveOptions"
-                        [containerStyle]="{ 'max-width': '850px' }"
-                        [numVisible]="7"
-                        [circular]="true"
-                        [fullScreen]="true"
-                        [showItemNavigators]="true"
-                        [showThumbnails]="true">
-                        <ng-template pTemplate="item" style="display: block;" let-item>
-                            <img [src]="item.imageSrc" style="width: 100%; display: block;"/>
+                    <p-galleria [(value)]="images"
+                                [(visible)]="displayCustom"
+                                [(activeIndex)]="activeIndex"
+                                [responsiveOptions]="responsiveOptions"
+                                [containerStyle]="{ 'max-width': '850px' }"
+                                [numVisible]="7"
+                                [circular]="true"
+                                [fullScreen]="true"
+                                [showItemNavigators]="true"
+                                [showThumbnails]="true">
+                        <ng-template pTemplate="item" 
+                                     style="display: block;" 
+                                     let-item>
+                            <img [src]="item.imageSrc" 
+                                 style="width: 100%; 
+                                        display: block;"/>
                             <div style="position:absolute;
                                         display: block;
                                         overflow: hidden;
@@ -78,20 +113,29 @@
                                            font-size: 16px;">
                                     {{item.postImageDescription}}
                                 </h1>
-                                <div style="position: absolute; bottom: 5px; right: 5px;"
+                                <div style="position: absolute; 
+                                            bottom: 5px; 
+                                            right: 5px;"
                                      (click)="removeItemFromArray(item.postImageFilename)">
-                                    <i class="pi pi-trash" style="color: rgb(255, 255, 255); cursor: pointer;">Apagar</i>
+                                    <i class="pi pi-trash" 
+                                       style="color: rgb(255, 255, 255); 
+                                              cursor: pointer;">
+                                        Apagar
+                                    </i>
                                 </div>
                             </div>
                         </ng-template>
-                        <ng-template pTemplate="thumbnail" let-item>
-                            <div class="grid grid-nogutter justify-content-center">
-                                <img [src]="item.imageSrc" style="display: block; width: 20%;" />
+                        <ng-template pTemplate="thumbnail" 
+                                     let-item>
+                            <div class="grid 
+                                        grid-nogutter 
+                                        justify-content-center">
+                                <img [src]="item.imageSrc" 
+                                     style="display: block; 
+                                            width: 20%;"/>
                             </div>
                         </ng-template>
-                    </p-galleria>
-        
-        
+                    </p-galleria> 
                     <p-toolbar styleClass="mb-4">
                         <ng-template pTemplate="left">
                             <div class="my-2">
@@ -106,5 +150,6 @@
                     </p-toolbar>
                 </p-tabPanel>
             </p-tabView>  
+        </div>
     </div>
 </div>

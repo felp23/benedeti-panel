@@ -37,6 +37,8 @@ export class AddPostComponent implements OnInit {
     response: any[] = [];
     images: any[];
  
+    stateOptions: any[] = [{label: 'Sim', value: '1'}, {label: 'Não', value: '0'}];
+    value: string = '0';
 
     responsiveOptions: any[] = [
         {
@@ -76,6 +78,7 @@ export class AddPostComponent implements OnInit {
     }
 
     addPost() {
+        this.postService.newPost.postCarousel = this.value;
         if (this.images) {
             this.postService.newPost.postImages = JSON.stringify(this.images);
         }
