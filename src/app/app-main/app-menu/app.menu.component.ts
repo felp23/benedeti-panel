@@ -29,8 +29,18 @@ export class AppMenuComponent implements OnInit {
                 items:[
                     {
                         label: 'Dashboard',
-                        icon: 'pi pi-fw pi-home', 
+                        icon: 'pi pi-fw pi-chart-line', 
                         routerLink: ['/pages/dashboard']
+                    },
+                ]
+            },
+            {
+                label: 'Site',
+                items:[
+                    {
+                        label: 'Postagens',
+                        icon: 'pi pi-fw pi-plus', 
+                        routerLink: ['/pages/posts']
                     },
                     {
                         label: 'Usuários',
@@ -41,16 +51,6 @@ export class AppMenuComponent implements OnInit {
                         label: 'Simulados',
                         icon: 'pi pi-fw pi-list', 
                         routerLink: ['/pages/questionnaires']
-                    },
-                ]
-            },
-            {
-                label: 'Site',
-                items:[
-                    {
-                        label: 'Postagens',
-                        icon: 'pi pi-fw pi-home', 
-                        routerLink: ['/pages/posts']
                     },
                     {
                         label: 'Newsletter',
