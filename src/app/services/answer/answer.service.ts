@@ -61,11 +61,22 @@ export class AnswerService {
             catchError(this.handleError('Answers', [])));
     }
 
-    deleteAnswer(answerId): Observable<any> {
+    deleteAnswerById(answerId): Observable<any> {
         let URL = this.configService.baseURL + 'answer/delete-answer';
         return this.http.post<any>(URL, 
         {
             answerId: answerId,
+        })
+        .pipe(
+            tap(data => this.log(data)),
+            catchError(this.handleError('Answers', [])));
+    }
+
+    deleteAnswerByQyestuion(answerQuestionId): Observable<any> {
+        let URL = this.configService.baseURL + 'answer/delete-answer-by-question';
+        return this.http.post<any>(URL, 
+        {
+            answerQuestionId: answerQuestionId,
         })
         .pipe(
             tap(data => this.log(data)),

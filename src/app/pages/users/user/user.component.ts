@@ -5,10 +5,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService, SharedService, ConfigService, StorageService, UserService, ToasterService } from 'src/app/services';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.scss']
 })
+
 export class UserComponent implements OnInit {
 
     allowEdit: boolean = false;

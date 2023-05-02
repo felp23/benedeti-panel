@@ -18,6 +18,7 @@ import { QuestionComponent } from './pages/questionnaires/questions/question/que
 import { PostsComponent } from './pages/posts/posts.component';
 import { PostComponent } from './pages/posts/post/post.component';
 import { AddPostComponent } from './pages/posts/add-post/add-post.component';
+import { QuestionsComponent } from './pages/questionnaires/questions/questions.component';
 
 // CUSTOM COMPONENTS
 
@@ -56,6 +57,10 @@ import { AddPostComponent } from './pages/posts/add-post/add-post.component';
                     {
                         path: 'questionnaires', 
                         component: QuestionnairesComponent
+                    },
+                    {
+                        path: 'questions', 
+                        component: QuestionsComponent
                     },
                     {
                         path: 'quiz', 

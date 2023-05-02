@@ -35,16 +35,14 @@ export class AnswerComponent implements OnInit {
 
     deleteAnswer() {
         console.log('Nova resposta:', this.answerService.newAnswer);
-        this.answerService.deleteAnswer(this.editedAnswer.answerId).subscribe(data => 
-            this.checkDeleteReturn(data)
+        this.answerService.deleteAnswerById(this.editedAnswer.answerId).subscribe(data => 
+            {
+                console.log('Resposta', data);   
+                if (data.success == true) {
+                    this.answerService.selectedAnswer = {};
+                    this.ref.close(this.sharedService.toastAddSuccess());
+                }
+            }
         );
-    }
-
-    checkDeleteReturn(response) {
-        console.log('Resposta', response);   
-        if (response.success == true) {
-            this.answerService.selectedAnswer = {};
-            this.ref.close(this.sharedService.toastAddSuccess());
-        }
     }
 }

@@ -48,9 +48,21 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/pages/users']
                     },
                     {
-                        label: 'Simulados',
-                        icon: 'pi pi-fw pi-list', 
-                        routerLink: ['/pages/questionnaires']
+                        label: 'Simulados', 
+                        icon: 'pi pi-list',
+                        routerLink: ['/pages/questionnaires'],
+                        items: [
+                            {
+                                label: 'Simulados', 
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/questionnaires']
+                            },
+                            {
+                                label: 'Perguntas', 
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/questions']
+                            }
+                        ]
                     },
                     {
                         label: 'Newsletter',

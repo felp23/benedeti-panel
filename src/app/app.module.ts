@@ -148,12 +148,18 @@ import { LoginComponent } from './auth/login/login.component';
 import { UserComponent } from './pages/users/user/user.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AddUserComponent } from './pages/users/add-user/add-user.component';
-import { UsersModule } from './pages/users/users.module';
-import { QuestionnairesModule } from './pages/questionnaires/questionnaires.module';
 import { PostsComponent } from './pages/posts/posts.component';
 import { AddPostComponent } from './pages/posts/add-post/add-post.component';
 import { PostComponent } from './pages/posts/post/post.component';
 import { AddImageComponent } from './pages/shared/add-image/add-image.component';
+import { QuestionnairesComponent } from './pages/questionnaires/questionnaires.component';
+import { AddAnswerComponent } from './pages/questionnaires/questions/add-answer/add-answer.component';
+import { AddQuestionComponent } from './pages/questionnaires/questions/add-question/add-question.component';
+import { AnswerComponent } from './pages/questionnaires/questions/answer/answer.component';
+import { QuestionComponent } from './pages/questionnaires/questions/question/question.component';
+import { QuestionsComponent } from './pages/questionnaires/questions/questions.component';
+import { QuizModalComponent } from './pages/questionnaires/quiz-modal/quiz-modal.component';
+import { QuizComponent } from './pages/questionnaires/quiz/quiz.component';
 
 @NgModule({
     imports: [
@@ -245,8 +251,6 @@ import { AddImageComponent } from './pages/shared/add-image/add-image.component'
         VirtualScrollerModule,
         AppCodeModule,
         StyleClassModule,
-        UsersModule,
-        QuestionnairesModule,
         SelectButtonModule
     ],
     declarations: [
@@ -295,7 +299,18 @@ import { AddImageComponent } from './pages/shared/add-image/add-image.component'
         AddPostComponent,
         PostsComponent,
         PostComponent,
-        AddImageComponent
+        AddImageComponent,
+        UserComponent,
+        AddUserComponent,
+        UsersComponent,
+        QuizComponent,
+        QuizModalComponent,
+        QuestionnairesComponent,
+        QuestionsComponent,
+        AddQuestionComponent,
+        QuestionComponent,
+        AddAnswerComponent,
+        AnswerComponent,
         // CUSTOM COMPONENTS
         // LoginComponent,
         // UserComponent,
