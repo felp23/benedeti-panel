@@ -7,36 +7,75 @@
             <br>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12">
-                    <label>Descrição</label>
+                    <label>Descrição:</label>
                     <textarea pInputTextarea 
                               rows="5" 
                               cols="30"
-                              [(ngModel)]="editedQuestion.questionDescription"></textarea>
+                              [(ngModel)]="editedQuestion.questionDescription"
+                              [disabled]="!allowEdit"></textarea>
                 </div>
                 <div class="field col-3 md:col-3">
-                    <label>Nível de dificuldade</label>
-                    <p-dropdown [options]="options" [(ngModel)]="editedQuestion.questionDifficulty"></p-dropdown>
+                    <label>Nível de dificuldade:</label>
+                    <p-dropdown [options]="options" 
+                                [(ngModel)]="editedQuestion.questionDifficulty"
+                                [disabled]="!allowEdit"></p-dropdown>
                 </div>
-                <div class="field col-3 md:col-3">
-                    <label style="color:#FFF">Enviar</label>
+            </div>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Editar" 
+                                icon="pi pi-user-edit" 
+                                class="p-button-primary mr-2"
+                                *ngIf="!allowEdit"
+                                (click)="changeEdit()"></button>
+                    </div>
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Salvar" 
+                                icon="pi pi-check" 
+                                class="p-button-success mr-2"
+                                *ngIf="allowEdit"
+                                (click)="editQuestion()"></button>
+                    </div>
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Cancelar" 
+                                icon="pi pi-times" 
+                                class="p-button-secondary mr-2"
+                                *ngIf="allowEdit"
+                                (click)="changeEdit()"></button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="my-2">
+                        <button pButton 
+                                pRipple 
+                                label="Apagar" 
+                                icon="pi pi-trash" 
+                                class="p-button-danger mr-2"
+                                *ngIf="allowEdit"
+                                (click)="confirmQuestionDelete($event)"></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+        </div>
+    </div>
+</div>
+<div class="grid">
+    <div class="col-6">
+        <div class="card">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12">
+                    <label>Respostas:</label>
                     <p-button label="Adicionar resposta"
                               (click)="showAddAnswerDialog()"></p-button>
                 </div>
-                <div class="field col-4 md:col-4">
-                    <label>Questionarios</label>
-                    <p-autoComplete [(ngModel)]="selectedQuiz" 
-                                    [dropdown]="true" 
-                                    [suggestions]="filteredQuestionnaires" 
-                                    (completeMethod)="filterQuestionnaires($event)" 
-                                    field="quizName"></p-autoComplete>
-                </div>
-                <div class="field col-2 md:col-2">
-                    <label style="color:#FFF">Enviar</label>
-                    <p-button label="Adicionar"
-                              [disabled]="!selectedQuiz"></p-button>
-                </div>
-                <div class="field col-6 md:col-6">
-                    <label>Respostas</label>
+                <div class="field col-12 md:col-12">
                     <p-dataView #dv [value]="filteredAnswers" emptyMessage="Nenhuma resposta foi adicionada">
                         <ng-template let-answer pTemplate="listItem">
                             <div class="col-12">
@@ -70,8 +109,29 @@
                         </ng-template>
                     </p-dataView>
                 </div>
-                <div class="field col-6 md:col-6">
-                    <p-dataView #dv [value]="selectedQuestionnaires" emptyMessage="Nenhuma questionario foi adicionado">
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-10 md:col-10">
+                    <label>Simulados:</label>
+                    <p-autoComplete [(ngModel)]="selectedQuiz" 
+                                    [dropdown]="true" 
+                                    [suggestions]="filteredQuestionnaires" 
+                                    (completeMethod)="filterQuestionnaires($event)" 
+                                    field="quizName"></p-autoComplete>
+                </div>
+                <div class="field col-2 md:col-2">
+                    <label style="color:#FFF">Enviar</label>
+                    <p-button label="Adicionar"
+                              [disabled]="!selectedQuiz"
+                              (click)="addQuiz()"></p-button>
+                </div>
+                <div class="field col-12 md:col-12">
+                    <label>Selecionados:</label>
+                    <p-dataView *ngIf="questionQuestionnaires" #dv [value]="selectedQuestionnaires" emptyMessage="Nenhuma questionario foi adicionado">
                         <ng-template let-quiz pTemplate="listItem">
                             <div class="col-12">
                                 <div cursor-pointer 
@@ -85,7 +145,7 @@
                                             <button pButton 
                                                     icon="pi pi-times" 
                                                     class="md:align-self-end mb-2 p-button-danger"
-                                                    (click)="removeQuiz(quiz)"></button>
+                                                    (click)="removeQuiz($event, quiz)"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -94,23 +154,6 @@
                     </p-dataView>
                 </div>
             </div>
-            <p-toolbar styleClass="mb-4">
-                <ng-template pTemplate="left">
-                    <div class="my-2">
-                        <button pButton 
-                                pRipple 
-                                label="Salvar" 
-                                icon="pi pi-check" 
-                                class="p-button-success mr-2" 
-                                (click)="addQuestion()"></button>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="right">
-                    <p-button icon="pi pi-times" 
-                              styleClass="p-button-danger"
-                              (click)="confirmQuestionDelete($event)"></p-button>
-                </ng-template>
-            </p-toolbar>
         </div>
     </div>
 </div>

@@ -68,6 +68,17 @@ export class QuizService {
             catchError(this.handleError('tests', [])));
     }
 
+    getQuizById(quizId: any): Observable<any> {
+        let URL = this.configService.baseURL + 'quiz/quiz-by-id';
+        return this.http.post<any>(URL, 
+        {
+            quizId:quizId
+        })
+        .pipe(
+            tap(data => this.log(data)),
+            catchError(this.handleError('tests', [])));
+    }
+
     editUser(editedUser): Observable<any> {
         let URL = this.configService.baseURL + 'user/edit-user.php';
         return this.http.post<any>(URL, 
